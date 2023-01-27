@@ -1,0 +1,61 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "House1",
+            "desc": "Apple iPhone 12th generation",
+            "price": 999,
+            "color": "#33505a",
+            "image": "assets/images/house_Card1.jpeg"
+        },
+        {
+            "id": 2,
+            "name": "House2",
+            "desc": "Google Pixel phone 5th generation",
+            "price": 699,
+            "image": "assets/images/house_Card2.jpeg"
+        },
+        {
+            "id": 3,
+            "name": "House4",
+            "desc": "Apple Macbook air with apple silicon",
+            "price": 1099,
+            "image": "assets/images/house_Card1.jpeg"
+        },
+        {
+            "id": 4,
+            "name": "House5",
+            "desc": "Sony Playstation 5th generation",
+            "price": 500,
+            "image": "assets/images/house_Card2.jpeg"
+        },
+        {
+            "id": 5,
+            "name": "House6",
+            "desc": "Apple Aipods Pro 1st generation",
+            "price": 200,
+            "image": "assets/images/house_Card1.jpeg"
+        },
+        {
+            "id": 6,
+            "name": "House7",
+            "desc": "Apple iPad Pro 2020 edition",
+            "price": 799,
+            "image": "assets/images/house_Card2.jpeg"
+        },
+        {
+            "id": 7,
+            "name": "Galaxy S21 Ultra",
+            "desc": "Samsung Galaxy S21 Ultra 2021 edition",
+            "price": 1299,
+            "image": "assets/images/house_Card1.jpeg"
+        },
+        {
+            "id": 8,
+            "name": "Galaxy S21",
+            "desc": "Samsung Galaxy S21 2021 edition",
+            "price": 899,
+            "image": "assets/images/house_Card2.jpeg"
+        }
+    ]
+}

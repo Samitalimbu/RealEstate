@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:division/division.dart';
+import 'package:first/screens/detail_screen.dart';
 import 'package:first/screens/home_list.dart';
 import 'package:first/screens/models/catalog.dart';
-import 'package:first/widgets/item_widget.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,13 +18,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(4, (index) => CatalogModel.items[0]);
-    final Screen = MediaQuery.of(context).size;
+    final height = MediaQuery.of(context).size.height;
+    final actualHeight = height - MediaQuery.of(context).padding.top;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
-          height: Screen.height,
-          width: Screen.width,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -101,10 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      _getCategoryInfo("what"),
                       _getCategoryInfo("House"),
+                      _getCategoryInfo("Apartment"),
                       _getCategoryInfo("Rooms"),
-                      _getCategoryInfo("Buy"),
+                      _getCategoryInfo("Land"),
                     ],
                   ),
                 ),
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const HomeListScreen()));
+                                      const DetailPageScreen()));
                         }),
                         child: Txt("See All",
                             style: TxtStyle()
@@ -132,44 +132,84 @@ class _HomeScreenState extends State<HomeScreen> {
                               ..fontSize(14)),
                       ),
                     ]),
-                const SizedBox(height: 12),
-                ImageSlideshow(
-                  width: double.infinity,
-                  height: 150,
-                  initialPage: 0,
-                  indicatorColor: Colors.blue,
-                  indicatorBackgroundColor: Colors.grey,
-                  // called whenever the page in the center of the viewpoint changes.
-                  onPageChanged: (value) {
-                    // print('page changed: $value');
-                  },
-                  autoPlayInterval: 3000,
-                  isLoop: true,
-
-                  children: [
-                    Image.asset(
-                      'assets/images/house_Card1.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/images/house_Card2.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/images/house_Card1.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 22),
-                SizedBox(
-                  height: 200,
+                Container(
+                  height: 280,
                   child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: books.length,
                     physics: BouncingScrollPhysics(),
-                    itemCount: dummyList.length,
                     itemBuilder: (context, index) {
-                      return ItemWidget(
-                        item: dummyList[index],
+                      final book = books[index];
+                      return Container(
+                        width: 370,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            right: 12,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                //borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
+                                child: Image.asset(
+                                  book.imageUrl,
+                                  width: 160,
+                                  height: 250,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Expanded(
+                                child: Card(
+                                  child: Container(
+                                    height: 200,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 18,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Txt(book.title,
+                                              style: TxtStyle()
+                                                ..padding(right: 82, bottom: 6)
+                                                ..fontWeight(FontWeight.bold)
+                                                ..fontSize(14)),
+                                          Row(
+                                            children: [
+                                              Txt(book.location,
+                                                  style: TxtStyle()
+                                                    ..padding(
+                                                        bottom: 6, left: 8)
+                                                    ..fontSize(14)),
+                                              const Icon(
+                                                Icons.my_location,
+                                                color: Colors.blue,
+                                              )
+                                            ],
+                                          ),
+                                          Txt(book.detail,
+                                              style: TxtStyle()
+                                                ..padding(
+                                                    right: 26,
+                                                    bottom: 6,
+                                                    left: 8)
+                                                ..fontSize(14)),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                book.rating,
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   ),

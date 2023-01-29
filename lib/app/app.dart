@@ -6,23 +6,30 @@ import 'package:first/screens/register_screen.dart';
 import 'package:first/screens/splash_screen.dart';
 import 'package:first/screens/walkthrough_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        "/walkthrough": (context) => const WalkthroughScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/': (context) => const RegisterScreen(),
-        '/dash': ((context) => const DashboardaScreen()),
-        '/home': ((context) => const HomeListScreen()),
-        '/detail': ((context) => const DetailPageScreen()),
+    return ScreenUtilInit(
+      designSize: Size(411, 866),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: '/',
+            routes: {
+              '/splash': (context) => const SplashScreen(),
+              "/walkthrough": (context) => const WalkthroughScreen(),
+              '/login': (context) => const LoginScreen(),
+              '/register': (context) => const RegisterScreen(),
+              '/': ((context) => const DashboardaScreen()),
+              // '/home': ((context) => const HomeListScreen()),
+              '/detail': ((context) => const DetailPageScreen()),
+            });
       },
     );
   }

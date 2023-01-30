@@ -70,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 12),
             Txt(
-              "Phone number",
+              "Phone ",
               style: TxtStyle()
                 ..fontSize(18)
                 ..textColor(Colors.blue)

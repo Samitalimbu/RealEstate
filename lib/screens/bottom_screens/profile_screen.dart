@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
               child: Txt("Profile",
                   style: TxtStyle()
                     ..fontSize(20)
-                    ..padding(top: 18)
+                    ..padding(top: 16)
                     ..textColor(Colors.blue)
                     ..fontWeight(FontWeight.bold)),
             ),
@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Container(
                       child: Image.asset(
                     "assets/images/circle_profile.png",
-                    height: 300,
+                    height: 200,
                     width: 280,
                   )),
                 ),

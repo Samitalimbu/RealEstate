@@ -47,7 +47,7 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
         return AmbientMode(
           builder: (context, mode, child) {
             return Scaffold(
-              backgroundColor: Colors.grey[300],
+              backgroundColor: Colors.white,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Form(
@@ -66,17 +66,17 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                     ..fontSize(18)
                                     ..padding(top: 8)
                                     ..fontWeight(FontWeight.bold)
-                                    ..textColor(Colors.blue),
+                                    ..textColor(const Color(0xff557A95)),
                                 ),
                               ),
-                             const  SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Txt(
                                 "Email",
                                 style: TxtStyle()
                                   ..fontSize(8)
                                   ..fontWeight(FontWeight.w500)
                                   ..fontFamily('Playfair_Display')
-                                  ..textColor(Colors.blue),
+                                  ..textColor(Color.fromARGB(255, 57, 90, 114)),
                               ),
                               const SizedBox(height: 6),
                               Container(
@@ -100,7 +100,7 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                   ..fontSize(8)
                                   ..fontWeight(FontWeight.w500)
                                   ..fontFamily('Playfair_Display')
-                                  ..textColor(Colors.blue),
+                                  ..textColor(Color.fromARGB(255, 57, 90, 114)),
                               ),
                               const SizedBox(height: 6),
                               Container(
@@ -128,7 +128,7 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
-                                                  Colors.red)),
+                                                  const Color(0xff7395AE))),
                                       child: const Text('Login'),
                                       onPressed: () {
                                         _loginUser();

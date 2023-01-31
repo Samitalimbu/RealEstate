@@ -1,3 +1,5 @@
+import 'package:division/division.dart';
+import 'package:first/screens/models/catalog.dart';
 import 'package:flutter/material.dart';
 import 'package:wear/wear.dart';
 
@@ -20,16 +22,20 @@ class _WearDashboardScreenState extends State<WearDashboardScreen> {
         child,
       ) {
         return Scaffold(
-          appBar: AppBar(
-            toolbarHeight: MediaQuery.of(context).size.height * .2,
-            title: const Text('Dashboard'),
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Column(
-                children: const [
-                  Text('Dashboard'),
+                children: [
+                  Center(
+                    child: Txt(
+                      "Welcome to Mero Ghar",
+                      style: TxtStyle()
+                        ..fontSize(14)
+                        ..fontWeight(FontWeight.bold)
+                        ..textColor(Colors.blue),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
               "/walkthrough": (context) => const WalkthroughScreen(),
               '/login': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
-              'dashboard1': ((context) => const WearDashboardScreen()),
-              '/': ((context) => const WearLoginScreen()),
+              '/': ((context) => const WearDashboardScreen()),
+              '/wearlogin': ((context) => const WearLoginScreen()),
 
               '/google': ((context) => const GoogleMapScreen()),
 

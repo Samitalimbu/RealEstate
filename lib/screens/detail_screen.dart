@@ -2,15 +2,9 @@ import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class DetailPageScreen extends StatefulWidget {
-  const DetailPageScreen({super.key});
-
-  @override
-  State<DetailPageScreen> createState() => _DetailPageScreenState();
-}
-
-class _DetailPageScreenState extends State<DetailPageScreen> {
+class DetailPageScreen extends StatelessWidget {
   bool isPressed = true;
+
   @override
   Widget build(BuildContext context) {
     Offset distance = isPressed ? Offset(10, 10) : Offset(28, 28);
@@ -28,11 +22,9 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
                   image: DecorationImage(
                       image: AssetImage(
                         "assets/images/house_Card1.jpeg",
-                        
                       ),
                       fit: BoxFit.fill)),
             ),
-            
           ),
           Positioned(
             top: 400,

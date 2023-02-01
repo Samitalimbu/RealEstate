@@ -21,6 +21,13 @@ class Book {
         title: json['title'],
         location: json['location']);
   }
+  @override
+  String toString() {
+    return 'Book('
+        'imageUrl: $imageUrl,'
+        'title:$title,'
+        ')';
+  }
 }
 
 List<Book> books = [

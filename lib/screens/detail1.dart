@@ -110,21 +110,96 @@ class DetailPageScreen1 extends StatelessWidget {
                 ),
               ),
               Positioned(
+                left: 1,
                 top: 300,
                 child: Container(
-                  child: Txt(
-                    book.detail,
-                    style: TxtStyle()
-                      ..fontSize(14)
-                      ..padding(all: 16)
-                      ..textColor(Colors.black),
+                  child: Column(
+                    children: [
+                      Txt(
+                        book.detail,
+                        style: TxtStyle()
+                          ..fontSize(14)
+                          ..padding(all: 16)
+                          ..textColor(Colors.black),
+                      ),
+                      Txt(
+                        "Gallery",
+                        style: TxtStyle()
+                          ..fontSize(18)
+                          ..fontWeight(FontWeight.bold)
+                          ..padding(right: 550)
+                          ..textColor(Colors.black),
+                      ),
+                      SizedBox(height: 14),
+                      SizedBox(
+                        height: 70,
+                        child: ListView(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            _getCategoryInfo(""),
+                            _getCategoryInfo(""),
+                            _getCategoryInfo(""),
+                            _getCategoryInfo(""),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 200,
+                          width: 642,
+                          color: const Color(0xfff2f1f2),
+                          child: const ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/profile1.png"),
+                            ),
+                            title: Txt("Riya Shrestha(0wner)"),
+                            subtitle: Text(
+                              "The apartments consists of two bedrooms, a bathroom, \n a kitchen and a living room is located in Zadar, 800 m from Maestrala Beach, and provides a patio, garden, and free WiFi. This apartment is 2.2 km \n from Puntamika Beach and 29 km from Kornati Marina.",
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 130,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.red)),
+                          child: const Text('Message'),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     ));
   }
+}
+
+Widget _getCategoryInfo(String image) {
+  return Parent(
+      style: ParentStyle()
+        ..height(60)
+        ..width(80)
+        ..elevation(3, color: Colors.grey.withOpacity(0.5))
+        ..margin(right: 74)
+        ..borderRadius(all: 10),
+      child: Image.asset(
+        "assets/images/House2.jpg",
+        fit: BoxFit.cover,
+      ));
 }

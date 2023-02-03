@@ -1,9 +1,11 @@
 import 'package:division/division.dart';
+import 'package:first/screens/bottom_screens/home_screens.dart';
 import 'package:first/screens/dashboard_screens.dart';
 import 'package:first/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 
+import '../app/snackbar.dart';
 import '../model/user.dart';
 import '../repository/user_repo.dart';
 
@@ -20,20 +22,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
 
   final _passwordController = TextEditingController();
-
   _loginUser() async {
-    User? status = await UserRepositoryImpl()
+    final islogin = await UserRepositoryImpl()
         .loginUser(_usernameController.text, _passwordController.text);
-    _showMessage(status!.userId);
+    if (islogin!) {
+      _goToAnotherPage();
+    } else {
+      _showMessage();
+    }
   }
 
-  _showMessage(int status) async {
-    if (status > 0) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const DashboardaScreen()));
-    } else {
-      MotionToast.error(description: const Text('error login'));
-    }
+  _goToAnotherPage() {
+    Navigator.pushNamed(context, '/home');
+  }
+
+  _showMessage() {
+    showSnackbar(context, 'Invalid username or password', Colors.red);
   }
 
   @override
@@ -83,6 +87,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter Email';
+                              }
+                              String pattern =
+                                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                  r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                  r"{0,253}[a-zA-Z0-9])?)*$";
+                              RegExp regex = RegExp(pattern);
+                              if (value.isEmpty || !regex.hasMatch(value)) {
+                                return 'Enter a valid email address';
+                              }
+                              return null;
+                            },
                             controller: _usernameController,
                             decoration: const InputDecoration(
                                 border: InputBorder.none, hintText: "Email"),
@@ -107,6 +125,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter Password';
+                              }
+                              if (value.length < 6) {
+                                return 'Password length must be at least 6 characters';
+                              }
+
+                              return null;
+                            },
                             controller: _passwordController,
                             decoration: const InputDecoration(
                                 border: InputBorder.none, hintText: "Password"),

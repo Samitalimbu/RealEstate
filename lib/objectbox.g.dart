@@ -22,14 +22,15 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 7396607970243363047),
       name: 'User',
-      lastPropertyId: const IdUid(6, 4546666849303097289),
+      lastPropertyId: const IdUid(14, 77140488986964498),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
             id: const IdUid(1, 8349550053851588128),
             name: 'userId',
-            type: 6,
-            flags: 129),
+            type: 9,
+            flags: 2080,
+            indexId: const IdUid(1, 8673086366255484993)),
         ModelProperty(
             id: const IdUid(4, 408631088515172712),
             name: 'username',
@@ -41,8 +42,23 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 4546666849303097289),
-            name: 'confirmpassword',
+            id: const IdUid(7, 5734728154781112461),
+            name: 'uId',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(12, 3965322980232776393),
+            name: 'fname',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 8504754888133978857),
+            name: 'lname',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 77140488986964498),
+            name: 'gender',
             type: 9,
             flags: 0)
       ],
@@ -71,12 +87,20 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(1, 7396607970243363047),
-      lastIndexId: const IdUid(0, 0),
+      lastIndexId: const IdUid(1, 8673086366255484993),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [7689552529372126866, 7400619578710374699],
+      retiredPropertyUids: const [
+        7689552529372126866,
+        7400619578710374699,
+        4546666849303097289,
+        8116610497151813234,
+        1297007926435503503,
+        5601494781913468688,
+        5000436402527303967
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -87,35 +111,54 @@ ModelDefinition getObjectBoxModel() {
         model: _entities[0],
         toOneRelations: (User object) => [],
         toManyRelations: (User object) => {},
-        getId: (User object) => object.userId,
+        getId: (User object) => object.uId,
         setId: (User object, int id) {
-          object.userId = id;
+          object.uId = id;
         },
         objectToFB: (User object, fb.Builder fbb) {
-          final usernameOffset = fbb.writeString(object.username);
-          final passwordOffset = fbb.writeString(object.password);
-          final confirmpasswordOffset = fbb.writeString(object.confirmpassword);
-          fbb.startTable(7);
-          fbb.addInt64(0, object.userId);
+          final userIdOffset =
+              object.userId == null ? null : fbb.writeString(object.userId!);
+          final usernameOffset = object.username == null
+              ? null
+              : fbb.writeString(object.username!);
+          final passwordOffset = object.password == null
+              ? null
+              : fbb.writeString(object.password!);
+          final fnameOffset =
+              object.fname == null ? null : fbb.writeString(object.fname!);
+          final lnameOffset =
+              object.lname == null ? null : fbb.writeString(object.lname!);
+          final genderOffset =
+              object.gender == null ? null : fbb.writeString(object.gender!);
+          fbb.startTable(15);
+          fbb.addOffset(0, userIdOffset);
           fbb.addOffset(3, usernameOffset);
           fbb.addOffset(4, passwordOffset);
-          fbb.addOffset(5, confirmpasswordOffset);
+          fbb.addInt64(6, object.uId);
+          fbb.addOffset(11, fnameOffset);
+          fbb.addOffset(12, lnameOffset);
+          fbb.addOffset(13, genderOffset);
           fbb.finish(fbb.endTable());
-          return object.userId;
+          return object.uId;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
           final object = User(
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 14, ''),
-              userId:
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0));
+              userId: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              fname: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 26),
+              lname: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 28),
+              username: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              password: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              uId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0))
+            ..gender = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 30);
 
           return object;
         })
@@ -127,7 +170,7 @@ ModelDefinition getObjectBoxModel() {
 /// [User] entity fields to define ObjectBox queries.
 class User_ {
   /// see [User.userId]
-  static final userId = QueryIntegerProperty<User>(_entities[0].properties[0]);
+  static final userId = QueryStringProperty<User>(_entities[0].properties[0]);
 
   /// see [User.username]
   static final username = QueryStringProperty<User>(_entities[0].properties[1]);
@@ -135,7 +178,15 @@ class User_ {
   /// see [User.password]
   static final password = QueryStringProperty<User>(_entities[0].properties[2]);
 
-  /// see [User.confirmpassword]
-  static final confirmpassword =
-      QueryStringProperty<User>(_entities[0].properties[3]);
+  /// see [User.uId]
+  static final uId = QueryIntegerProperty<User>(_entities[0].properties[3]);
+
+  /// see [User.fname]
+  static final fname = QueryStringProperty<User>(_entities[0].properties[4]);
+
+  /// see [User.lname]
+  static final lname = QueryStringProperty<User>(_entities[0].properties[5]);
+
+  /// see [User.gender]
+  static final gender = QueryStringProperty<User>(_entities[0].properties[6]);
 }

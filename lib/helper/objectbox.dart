@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:first/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,6 +21,11 @@ class ObjectBoxInstance {
       directory: '${dir.path}/user_details',
     );
     return ObjectBoxInstance(store);
+  }
+
+  static Future<void> deleteDatabase() async {
+    var dir = await getApplicationDocumentsDirectory();
+    Directory('${dir.path}/user_details').deleteSync(recursive: true);
   }
 
   int addUser(User user) {

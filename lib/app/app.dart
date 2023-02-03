@@ -30,14 +30,14 @@ class MyApp extends StatelessWidget {
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),
-              '/login': (context) => const LoginScreen(),
-              '/register': (context) => const RegisterScreen(),
+              '/login1': (context) => const LoginScreen(),
+              '/': (context) => const RegisterScreen(),
               '/dashboardwear': ((context) => const WearDashboardScreen()),
-              '/wearlogin': ((context) => const WearLoginScreen()),
+              '/login': ((context) => const WearLoginScreen()),
 
               '/google': ((context) => const GoogleMapScreen()),
 
-              '/': ((context) => const HomeScreen()),
+              '/home': ((context) => const HomeScreen()),
 
               // '/home': ((context) => const HomeListScreen()),
             });

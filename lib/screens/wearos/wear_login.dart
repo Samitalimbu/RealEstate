@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:wear/wear.dart';
 
+import '../../app/snackbar.dart';
 import '../../model/user.dart';
 import '../../repository/user_repo.dart';
 
@@ -23,19 +24,26 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
 
   final _passwordController = TextEditingController();
 
-  _loginUser() async {
-    User? status = await UserRepositoryImpl()
+  _login() async {
+    final islogin = await UserRepositoryImpl()
         .loginUser(_usernameController.text, _passwordController.text);
-    _showMessage(status!.userId);
+    if (islogin!) {
+      // write here
+      _goToAnotherPage();
+    } else {
+      _showMessage();
+    }
+    
+    
+
+    
+   }
+   _goToAnotherPage() {
+    Navigator.pushNamed(context, '/dashboardscreen');
   }
 
-  _showMessage(int status) async {
-    if (status > 0) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const WearDashboardScreen()));
-    } else {
-      MotionToast.error(description: const Text('error login'));
-    }
+  _showMessage() {
+    showSnackbar(context, 'Invalid username or password', Colors.red);
   }
 
   @override
@@ -86,6 +94,21 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                     border: Border.all(color: Colors.white),
                                     borderRadius: BorderRadius.circular(12)),
                                 child: TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Email';
+                                    }
+                                    String pattern =
+                                        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                        r"{0,253}[a-zA-Z0-9])?)*$";
+                                    RegExp regex = RegExp(pattern);
+                                    if (value.isEmpty ||
+                                        !regex.hasMatch(value)) {
+                                      return 'Enter a valid email address';
+                                    }
+                                    return null;
+                                  },
                                   controller: _usernameController,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
@@ -110,6 +133,16 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                     border: Border.all(color: Colors.white),
                                     borderRadius: BorderRadius.circular(12)),
                                 child: TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Password';
+                                    }
+                                    if (value.length < 6) {
+                                      return 'Password length must be at least 6 characters';
+                                    }
+
+                                    return null;
+                                  },
                                   controller: _passwordController,
                                   decoration: const InputDecoration(
                                       border: InputBorder.none,
@@ -130,8 +163,17 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                                               MaterialStateProperty.all(
                                                   const Color(0xff7395AE))),
                                       child: const Text('Login'),
-                                      onPressed: () {
-                                        _loginUser();
+                                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WearDashboardScreen()));
+                              }
+                            
                                       },
                                     ),
                                   ),

@@ -1,9 +1,13 @@
-import 'package:division/division.dart';
-import 'package:first/model/user.dart';
+import 'dart:io';
+
+import 'package:first/app/user_permission.dart';
+import 'package:first/repository/user_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:motion_toast/motion_toast.dart';
 
-import '../repository/user_repo.dart';
+import '../model/user.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -17,221 +21,294 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void initState() {
     super.initState();
     getUser();
+    checkPermission();
+  }
+
+  checkPermission() async {
+    await UserPermission.checkCameraPermission();
   }
 
   final _key = GlobalKey<FormState>();
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmpasswordController = TextEditingController();
-
   getUser() {
     UserRepositoryImpl().getUser().then((value) {
       print(value.isEmpty);
       for (var data in value) {
         print(data.userId);
-        print(data.username);
+        print(data.fname);
       }
     });
   }
 
+  // deleteUser(){
+  //   int status=UserRepositoryImpl().deleteUser();
+  //   _showMessage(status);
+  // }
+
   _showMessage(int status) {
     if (status > 0) {
       MotionToast.success(
-        description: const Text('User added suceessfully'),
+        description: const Text('Student added suceessfully'),
       ).show(context);
     } else {
-      MotionToast.error(description: const Text('Error in adding user'))
+      MotionToast.error(description: const Text('Error in adding student'))
           .show(context);
     }
   }
 
   _saveUser() async {
     User user = User(
-      _usernameController.text,
-      _passwordController.text,
-      _confirmpasswordController.text,
+      fname: _fnameController.text,
+      lname: _lnameController.text,
+      username: _usernameController.text,
+      password: _passwordController.text,
     );
-
     print(user);
-    int status = await UserRepositoryImpl().addUser(user);
+    int status = await UserRepositoryImpl().addUser(img, user);
     print(status);
     _showMessage(status);
   }
 
+  File? img;
+  Future _loadImage(ImageSource imageSource) async {
+    try {
+      final image = await ImagePicker().pickImage(source: imageSource);
+      if (image != null) {
+        setState(() {
+          img = File(image.path);
+        });
+      } else {
+        return;
+      }
+    } catch (e) {
+      debugPrint('Failed to pick Image $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
-
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Image.asset(
-                "assets/images/login1.png",
-                fit: BoxFit.fill,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 180, horizontal: 22),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Txt(
-                      "Login",
-                      style: TxtStyle()
-                        ..fontSize(30)
-                        ..fontWeight(FontWeight.bold)
-                        ..textColor(Colors.blue),
-                    ),
-                    const SizedBox(height: 18),
-                    Txt(
-                      "Username",
-                      style: TxtStyle()
-                        ..fontSize(16)
-                        ..fontWeight(FontWeight.w500)
-                        ..fontFamily('Playfair_Display')
-                        ..textColor(Colors.blue),
-                    ),
-                    const SizedBox(height: 14),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Form(
-                          key: _key,
-                          child: TextFormField(
-                            controller: _usernameController,
-                            decoration: const InputDecoration(
-                                border: InputBorder.none, hintText: "username"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 14),
-                    Txt(
-                      "Password",
-                      style: TxtStyle()
-                        ..fontSize(16)
-                        ..fontWeight(FontWeight.w500)
-                        ..fontFamily('Playfair_Display')
-                        ..textColor(Colors.blue),
-                    ),
-                    SizedBox(height: 14),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: TextFormField(
-                          controller: _passwordController,
-                          decoration: const InputDecoration(
-                              border: InputBorder.none, hintText: "Password"),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    Txt(
-                      "Confirm Password",
-                      style: TxtStyle()
-                        ..fontSize(16)
-                        ..fontWeight(FontWeight.w500)
-                        ..fontFamily('Playfair_Display')
-                        ..textColor(Colors.blue),
-                    ),
-                    const SizedBox(height: 14),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: TextFormField(
-                          controller: _confirmpasswordController,
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: "Password"),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 14),
-                    SizedBox(
-                      height: 40,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50))),
-                        onPressed: () {
-                          if (_key.currentState!.validate()) {
-                            _saveUser();
-
-                            // deleteUser();
-
-                          }
-                        },
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: "Brand Bold",
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 32),
-                      child: Row(children: <Widget>[
-                        Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.only(
-                                  left: 10.0, right: 20.0),
-                              child: const Divider(
-                                color: Colors.grey,
-                                height: 36,
-                                thickness: 2,
-                              )),
-                        ),
-                        const Text(
-                          "OR",
-                        ),
-                        Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.only(
-                                  left: 20.0, right: 10.0),
-                              child: const Divider(
-                                color: Colors.grey,
-                                thickness: 2,
-                                height: 36,
-                              )),
-                        ),
-                      ]),
-                    ),
-                    Positioned(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 127),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/images/facebook.png"),
-                            const SizedBox(
-                              width: 26,
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/login1.png"),
+                fit: BoxFit.fill)),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Form(
+                  key: _key,
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.grey[300],
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
                             ),
-                            Image.asset("assets/images/search-2.png"),
-                          ],
+                            builder: (context) => Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      _loadImage(ImageSource.camera);
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(Icons.camera),
+                                    label: const Text('Camera'),
+                                  ),
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      _loadImage(ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(Icons.image),
+                                    label: const Text('Gallery'),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 200,
+                          width: double.infinity - 500,
+                          child: img == null
+                              ? SvgPicture.asset(
+                                  'assets/svg/profile.svg',
+                                )
+                              : Image.file(img!),
                         ),
                       ),
-                    )
-                  ],
+
+                      TextFormField(
+                        controller: _fnameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          labelText: 'First Name',
+                        ),
+                        validator: ((value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter first name';
+                          }
+                          return null;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextFormField(
+                        controller: _lnameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          labelText: 'Last Name',
+                        ),
+                        validator: ((value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter last name';
+                          }
+                          return null;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+
+                      //     FutureBuilder(
+                      //   future: GenderRespositoryImpl().getAllGender(),
+                      //   builder: (context, snapshot) {
+                      //     if (snapshot.hasData) {
+                      //       return DropdownButtonFormField(
+                      //         validator: (value) {
+                      //           if (value == null) {
+                      //
+                      // return 'Please select gender';
+                      //           }
+                      //           return null;
+                      //         },
+                      //         isExpanded: true,
+                      //         decoration: const InputDecoration(
+                      //           border:OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+                      //           labelText: 'Select gender',
+                      //         ),
+                      //         items: snapshot.data!
+                      //             .map(
+                      //               (gender) => DropdownMenuItem(
+                      //                 value: gender,
+                      //                 child: Text(gender.genderName),
+                      //               ),
+                      //             )
+                      //             .toList(),
+                      //         onChanged: (value) {
+                      //           _dropDownValue = value!;
+                      //         },
+                      //       );
+                      //     } else {
+                      //       return const Center(
+                      //         child: CircularProgressIndicator(),
+                      //       );
+                      //     }
+                      //   },
+                      // ),
+
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextFormField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          labelText: 'Username',
+                        ),
+                        validator: ((value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter username';
+                          }
+                          return null;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          labelText: 'Password',
+                        ),
+                        validator: ((value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return null;
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                        height: 40,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orange,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50))),
+                          onPressed: () {
+                            if (_key.currentState!.validate()) {
+                              _saveUser();
+
+                              // deleteUser();
+                            }
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: "Brand Bold",
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.popAndPushNamed(context, '/login1');
+                        },
+                        child: const Icon(
+                          Icons.arrow_back,
+                          size: 24,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

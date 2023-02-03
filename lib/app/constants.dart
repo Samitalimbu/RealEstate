@@ -8,7 +8,7 @@ class Constant {
   // for user url
 
   static const String userloginURL = "users/login";
-  static const String userURL = "users";
+  static const String userRegisterURL = "users/register";
   static const String userImageURL = "http://10.0.2.2:3007";
 
   static String token = "";

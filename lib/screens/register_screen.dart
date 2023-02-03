@@ -29,10 +29,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   final _key = GlobalKey<FormState>();
-  final _fnameController = TextEditingController();
-  final _lnameController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _fnameController = TextEditingController(text: "testUser");
+  final _lnameController = TextEditingController(text: "testUser");
+  final _usernameController = TextEditingController(text: "testUser1");
+  final _passwordController = TextEditingController(text: "password");
   getUser() {
     UserRepositoryImpl().getUser().then((value) {
       print(value.isEmpty);
@@ -98,7 +98,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 image: AssetImage("assets/images/login1.png"),
                 fit: BoxFit.fill)),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -110,7 +109,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       InkWell(
                         onTap: () {
                           showModalBottomSheet(
-                            backgroundColor: Colors.grey[300],
                             context: context,
                             isScrollControlled: true,
                             shape: const RoundedRectangleBorder(
@@ -301,7 +299,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: const Icon(
                           Icons.arrow_back,
                           size: 24,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       )
                     ],

@@ -33,7 +33,7 @@ class UserRemoteDataSource{
         'image': image,
       });
       Response response = await _httpServices.post(
-        Constant.userURL,
+        Constant.userRegisterURL,
         data: formData,
       );
       if (response.statusCode == 201) {

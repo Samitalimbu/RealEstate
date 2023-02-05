@@ -1,4 +1,5 @@
 import 'package:first/screens/bottom_screens/home_screens.dart';
+import 'package:first/screens/bottom_screens/profile_screen.dart';
 import 'package:first/screens/dashboard_screens.dart';
 import 'package:first/screens/detail1.dart';
 import 'package:first/screens/detail_screen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return GetMaterialApp(
+        return MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             routes: {
@@ -32,7 +33,10 @@ class MyApp extends StatelessWidget {
               "/walkthrough": (context) => const WalkthroughScreen(),
               '/login1': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
-              '/': (context) => const GoogleMapScreen(),
+              '/': (context) => ProfileScreen(),
+              '/dashboard': (context) => const DashboardaScreen(),
+
+              '/google': (context) => const GoogleMapScreen(),
               '/dashboardwear': ((context) => const WearDashboardScreen()),
               '/login': ((context) => const WearLoginScreen()),
 

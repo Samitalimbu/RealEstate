@@ -18,7 +18,7 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
   List<Widget> lstBottomScreen = [
     const HomeScreen(),
     const SettingScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
     const SettingScreen()
   ];
   @override
@@ -57,6 +57,5 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
         },
       ),
     );
-   
   }
 }

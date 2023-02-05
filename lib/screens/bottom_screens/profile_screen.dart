@@ -1,121 +1,164 @@
-import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    final Screen = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.white,
-      height: Screen.height,
-      width: Screen.width,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Center(
-              child: Txt("Profile",
-                  style: TxtStyle()
-                    ..fontSize(20)
-                    ..padding(top: 16)
-                    ..textColor(Colors.blue)
-                    ..fontWeight(FontWeight.bold)),
-            ),
-            Stack(
-              children: [
-                Center(
-                  child: Container(
-                      child: Image.asset(
-                    "assets/images/circle_profile.png",
-                    height: 200,
-                    width: 280,
-                  )),
+    return MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.grey.shade300,
+          body: SingleChildScrollView(
+            child: Stack(
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, '/dashboard');
+                  },
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 32,
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: Center(
-                    child: Container(
-                        child: Image.asset(
+                const SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: Image(
+                    image: AssetImage(
                       "assets/images/profile1.png",
-                      height: 400,
-                      width: 500,
-                    )),
+                    ),
+                    fit: BoxFit.cover,
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 200, 15, 15),
+                  child: Column(
+                    children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(15),
+                            margin: EdgeInsets.only(top: 15),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(left: 95),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const <Widget>[
+                                      Text(
+                                        "Mosallas Group",
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.all(0),
+                                        title: Text(
+                                          "“Home is the starting place of love, hope and dreams.” “The magic thing about home is that it feels good to leave, and it feels even better to come back.",
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        //You can add Subtitle here
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Column(
+                                        children: const <Widget>[
+                                          Text("40"),
+                                          Text("Subscribers"),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: const <Widget>[
+                                          Text("800"),
+                                          Text("Views"),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: const <Widget>[
+                                          Text("8"),
+                                          Text("Videos"),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            height: 80,
+                            margin: EdgeInsets.only(left: 15),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 0),
+                                  blurRadius: 10,
+                                  color: Colors.black.withOpacity(0.15),
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                  "assets/images/profile1.png",
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: const <Widget>[
+                            ListTile(
+                              title: Text("About Me"),
+                            ),
+                            Divider(),
+                            ListTile(
+                              title: Text("Email"),
+                              subtitle: Text("MosallasDev@gmail.com"),
+                              leading: Icon(Icons.email),
+                            ),
+                            ListTile(
+                              title: Text("About"),
+                              subtitle: Text(
+                                  "We hope you find this channel useful.\nMosallas, is a group of 4 people who can do your projects well.\nAnd they will teach you their skills in this channel."),
+                              leading: Icon(Icons.format_align_center),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-            Txt(
-              "Full name",
-              style: TxtStyle()
-                ..fontSize(18)
-                ..textColor(Colors.blue)
-                ..fontWeight(FontWeight.bold),
-            ),
-            const TextField(
-              decoration: InputDecoration(),
-            ),
-            SizedBox(height: 12),
-            Txt(
-              "Qualifications",
-              style: TxtStyle()
-                ..fontSize(18)
-                ..textColor(Colors.blue)
-                ..fontWeight(FontWeight.bold),
-            ),
-            const TextField(
-              decoration: InputDecoration(),
-            ),
-            SizedBox(height: 12),
-            Txt(
-              "Phone ",
-              style: TxtStyle()
-                ..fontSize(18)
-                ..textColor(Colors.blue)
-                ..fontWeight(FontWeight.bold),
-            ),
-            const TextField(
-              decoration: InputDecoration(),
-            ),
-            SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Parent(
-                  style: ParentStyle()
-                    ..height(50)
-                    ..width(130)
-                    ..borderRadius(all: 12)
-                    ..background.color(Colors.blue),
-                  child: Txt(
-                    "Edit",
-                    style: TxtStyle()
-                      ..textColor(Colors.white)
-                      ..alignmentContent.center()
-                      ..fontSize(18),
-                  ),
-                ),
-                Parent(
-                  style: ParentStyle()
-                    ..height(50)
-                    ..width(130)
-                    ..borderRadius(all: 12)
-                    ..background.color(Colors.blue),
-                  child: Txt(
-                    "Save Changes",
-                    style: TxtStyle()
-                      ..textColor(Colors.white)
-                      ..alignmentContent.center()
-                      ..fontSize(18),
-                  ),
-                ),
-              ],
-            )
-          ]),
+          ),
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

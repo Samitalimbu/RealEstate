@@ -1,3 +1,4 @@
+import 'package:first/screens/dashboard_screens.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,7 +13,10 @@ class ProfileScreen extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/dashboard');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardaScreen()));
                   },
                   child: const Icon(
                     Icons.arrow_back,

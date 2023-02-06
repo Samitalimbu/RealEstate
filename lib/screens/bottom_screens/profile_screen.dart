@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                             margin: EdgeInsets.only(top: 15),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(5.0),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,34 +72,6 @@ class ProfileScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 6,
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Column(
-                                        children: const <Widget>[
-                                          Text("40"),
-                                          Text("Subscribers"),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        children: const <Widget>[
-                                          Text("800"),
-                                          Text("Views"),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        children: const <Widget>[
-                                          Text("8"),
-                                          Text("Videos"),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
                               ],
                             ),
                           ),
@@ -115,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.15),
                                 ),
                               ],
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                               image: const DecorationImage(
                                 image: AssetImage(
                                   "assets/images/profile1.png",

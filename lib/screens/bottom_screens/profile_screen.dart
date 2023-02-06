@@ -7,7 +7,7 @@ class ProfileScreen extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.grey.shade300,
+          backgroundColor: const Color(0xffE3E9E9),
           body: SingleChildScrollView(
             child: Stack(
               children: <Widget>[
@@ -18,13 +18,16 @@ class ProfileScreen extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => DashboardaScreen()));
                   },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 32,
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 28,
+                    ),
                   ),
                 ),
                 const SizedBox(
-                  height: 250,
+                  height: 300,
                   width: double.infinity,
                   child: Image(
                     image: AssetImage(

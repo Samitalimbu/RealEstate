@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
               "/walkthrough": (context) => const WalkthroughScreen(),
               '/login1': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
-              '/': (context) => ProfileScreen(),
+              '/profile': (context) => ProfileScreen(),
               '/dashboard': (context) => const DashboardaScreen(),
 
               '/google': (context) => const GoogleMapScreen(),
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
 
               '/google': ((context) => const GoogleMapScreen()),
 
-              '/home': ((context) => const HomeScreen()),
+              '/': ((context) => const HomeScreen()),
 
               // '/home': ((context) => const HomeListScreen()),
             });

@@ -23,38 +23,37 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: lstBottomScreen[_selectIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: "Likes",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
-        ],
-        currentIndex: _selectIndex,
-        onTap: (index) {
-          setState(
-            () {
-              _selectIndex = index;
-            },
-          );
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: lstBottomScreen[_selectIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.black,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Settings",
+            ),
+          ],
+          currentIndex: _selectIndex,
+          onTap: (index) {
+            setState(
+              () {
+                _selectIndex = index;
+              },
+            );
+          },
+        ),
       ),
     );
   }

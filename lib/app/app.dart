@@ -25,26 +25,22 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
+        return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/',
+            initialRoute: '/wear',
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),
-              '/login1': (context) => const LoginScreen(),
+              '/login': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
               '/profile': (context) => ProfileScreen(),
               '/dashboard': (context) => const DashboardaScreen(),
-
               '/google': (context) => const GoogleMapScreen(),
-              '/dashboardwear': ((context) => const WearDashboardScreen()),
-              '/login': ((context) => const WearLoginScreen()),
-
+              '/weardashboard': ((context) => const WearDashboardScreen()),
+              '/wear': ((context) => const WearLoginScreen()),
               '/google': ((context) => const GoogleMapScreen()),
-
-              '/': ((context) => const HomeScreen()),
-
-              // '/home': ((context) => const HomeListScreen()),
+              '/dash': ((context) => const HomeScreen()),
+              '/home': ((context) => const HomeScreen()),
             });
       },
     );

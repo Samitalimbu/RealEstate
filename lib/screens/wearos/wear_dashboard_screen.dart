@@ -6,8 +6,6 @@ import 'package:wear/wear.dart';
 class WearDashboardScreen extends StatefulWidget {
   const WearDashboardScreen({super.key});
 
-  static const String route = "wearDashboardScreen";
-
   @override
   State<WearDashboardScreen> createState() => _WearDashboardScreenState();
 }

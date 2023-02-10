@@ -1,8 +1,11 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:division/division.dart';
 import 'package:first/screens/bottom_screens/home_screens.dart';
 import 'package:first/screens/dashboard_screens.dart';
 import 'package:first/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:motion_toast/motion_toast.dart';
 
 import '../app/snackbar.dart';
@@ -17,6 +20,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  //Notification code
+  _checkNotificationsEnabled() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+  }
+
+  int Counter = 1;
+
+  @override
+  void initState() {
+    _checkNotificationsEnabled();
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   final _usernameController = TextEditingController(text: "testUser");
@@ -44,10 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[300],
+        body: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Stack(
@@ -141,22 +161,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      SizedBox(
-                        height: 50,
-                        width: 130,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.red)),
-                            child: const Text('Login'),
-                            onPressed: () {
-                              _loginUser();
-                            },
-                          ),
-                        ),
+                      const  SizedBox(height: 24),
+                      ElevatedButton(
+                        // key: const Key('btnLogin'),
+                        child:  Text('Login'),
+                        onPressed: () {
+                          setState(() {
+                            _loginUser();
+                            Fluttertoast.showToast(
+                                msg: 'you have login succesfully',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM_LEFT,
+                                backgroundColor: Colors.transparent,
+                                textColor: Colors.amber);
+                          });
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.red)),
                       ),
                       const SizedBox(height: 14),
                       Padding(

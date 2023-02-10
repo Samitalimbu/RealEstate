@@ -6,6 +6,7 @@ import 'package:first/screens/detail_screen.dart';
 import 'package:first/screens/googlemap_screen.dart';
 import 'package:first/screens/home_list.dart';
 import 'package:first/screens/login_screen.dart';
+import 'package:first/screens/property_listing_screen.dart';
 import 'package:first/screens/register_screen.dart';
 import 'package:first/screens/splash_screen.dart';
 import 'package:first/screens/walkthrough_screen.dart';
@@ -27,20 +28,21 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/wear',
+            initialRoute: '/dashboard',
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),
               '/login': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
-              '/profile': (context) => ProfileScreen(),
+              '/profile': (context) =>ProfileScreen(),
               '/dashboard': (context) => const DashboardaScreen(),
               '/google': (context) => const GoogleMapScreen(),
               '/weardashboard': ((context) => const WearDashboardScreen()),
               '/wear': ((context) => const WearLoginScreen()),
               '/google': ((context) => const GoogleMapScreen()),
-              '/dash': ((context) => const HomeScreen()),
-              '/home': ((context) => const HomeScreen()),
+              '/dash': ((context) =>  HomeScreen()),
+              '/home': ((context) =>  HomeScreen()),
+              '/PropertyListingScreen': ((context) =>  PropertyListingScreen()),
             });
       },
     );

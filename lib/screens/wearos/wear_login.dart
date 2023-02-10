@@ -52,7 +52,7 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
       body: SingleChildScrollView(
           child: Form(
         key: _formKey,
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Txt(
             "Email",
             style: TxtStyle()
@@ -61,17 +61,20 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
               ..fontFamily('Playfair_Display')
               ..textColor(Colors.blue),
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(12)),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: "Email"),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: TextFormField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, hintText: "Email"),
+                ),
               ),
             ),
           ),
@@ -83,28 +86,30 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
               ..fontFamily('Playfair_Display')
               ..textColor(Colors.blue),
           ),
-          const SizedBox(height: 14),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(12)),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter Password';
-                  }
-                  if (value.length < 6) {
-                    return 'Password length must be at least 6 characters';
-                  }
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Password';
+                    }
+                    if (value.length < 6) {
+                      return 'Password length must be at least 6 characters';
+                    }
 
-                  return null;
-                },
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: "Password"),
+                    return null;
+                  },
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, hintText: "Password"),
+                ),
               ),
             ),
           ),

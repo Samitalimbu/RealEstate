@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:division/division.dart';
+import 'package:first/model/locations.dart';
+import 'package:first/repository/location_repository.dart';
 import 'package:first/screens/detail_screen.dart';
 import 'package:first/screens/home_list.dart';
 import 'package:first/screens/models/catalog.dart';
+import 'package:first/screens/property_listing_screen.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,8 +15,17 @@ import 'package:sizer/sizer.dart';
 
 import '../detail1.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final searchField = TextEditingController();
+
+  List<Location> _locations = [];
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +89,58 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: TextFormField(
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: "Search"),
-              ),
+                  controller: searchField,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, hintText: "Search"),
+                  onChanged: (value) {
+                    LocationRepositoryImpl()
+                        .getLocationBasedOnSearch(value)
+                        .then((value) {
+                      setState(() {
+                        _locations = value;
+                      });
+                      print('location: $value');
+                    });
+                  }),
             ),
           ),
+          _locations.isNotEmpty
+              ? Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListView.builder(
+                    itemCount: _locations.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          print(_locations[index].id);
+                          Navigator.pushNamed(context, '/PropertyListingScreen',
+                              arguments: {
+                                "locationId":_locations[index].id
+                              });
+                        },
+                        child: Container(
+                          // width: double.infinity,
+                          // height: 40,
+                          alignment: Alignment.centerLeft,
+                          // margin:
+                          //     const EdgeInsets.only(bottom: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Text('${_locations[index].name}'),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Container(),
           Txt(
             "Categories",
             style: TxtStyle()

@@ -11,5 +11,7 @@ class Constant {
   static const String userRegisterURL = "users/register";
   static const String userImageURL = "http://10.0.2.2:3007";
 
+  static const String getLocationByText = "location/search";
+
   static String token = "";
 }

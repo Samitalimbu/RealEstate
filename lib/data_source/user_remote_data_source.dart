@@ -2,7 +2,7 @@ import 'dart:io';
 
 
 import 'package:dio/dio.dart';
-import 'package:first/data_source/remote_data_source/login_response.dart';
+import 'package:first/data_source/remote_data_source/response/login_response.dart';
 import 'package:first/helper/http_service.dart';
 
 import '../../app/constants.dart';

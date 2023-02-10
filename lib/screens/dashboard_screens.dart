@@ -16,7 +16,7 @@ class DashboardaScreen extends StatefulWidget {
 class _DashboardaScreenState extends State<DashboardaScreen> {
   int _selectIndex = 0;
   List<Widget> lstBottomScreen = [
-    const HomeScreen(),
+    HomeScreen(),
     const SettingScreen(),
     ProfileScreen(),
     const SettingScreen()
@@ -29,20 +29,16 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.blue,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           unselectedItemColor: Colors.black,
           items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: "Settings",
+              label: '',
             ),
           ],
           currentIndex: _selectIndex,

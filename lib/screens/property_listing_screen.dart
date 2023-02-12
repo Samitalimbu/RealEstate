@@ -26,7 +26,60 @@ class _PropertyListingScreenState extends State<PropertyListingScreen> {
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as dynamic;
     return Scaffold(
-      body: SafeArea(child: Text(args["locationId"])),
+      body: SafeArea(
+        child: Scaffold(
+            backgroundColor: const Color(0xffff5f5f3),
+            body: Column(
+              children: [
+                Icon(Icons.arrow_back),
+                Container(
+                    height: 400,
+                    child: ListView.builder(
+                        itemCount: 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                                height: 100,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.withOpacity(0.25),
+                                          spreadRadius: 2,
+                                          blurRadius: 14,
+                                          offset: Offset(0, 3))
+                                    ]),
+                                child: Row(
+                                  children:<Widget> [
+                                  
+                                    Icon(Icons.location_city),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Korea"),
+                                        Text(
+                                            "Hello beautiful people with the beautiful city \n hahaha this is a beautiful city")
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [Text("4,7"), 
+                                      Icon(Icons.star)],
+                                    )
+                                  ],
+                                )),
+                          );
+                        })),
+              ],
+            )),
+      ),
+
+      // child: Text(args["locationId"])))),
     );
   }
 }

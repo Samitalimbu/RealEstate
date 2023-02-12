@@ -28,21 +28,22 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/dashboard',
+            initialRoute: '/propertydetail',
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),
               '/login': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
-              '/profile': (context) =>ProfileScreen(),
+              '/profile': (context) => ProfileScreen(),
               '/dashboard': (context) => const DashboardaScreen(),
               '/google': (context) => const GoogleMapScreen(),
               '/weardashboard': ((context) => const WearDashboardScreen()),
               '/wear': ((context) => const WearLoginScreen()),
               '/google': ((context) => const GoogleMapScreen()),
-              '/dash': ((context) =>  HomeScreen()),
-              '/home': ((context) =>  HomeScreen()),
-              '/PropertyListingScreen': ((context) =>  PropertyListingScreen()),
+              '/dash': ((context) => HomeScreen()),
+              '/home': ((context) => HomeScreen()),
+              '/propertydetail': ((context) => PropertyListingScreen()),
+              '/PropertyListingScreen': ((context) => PropertyListingScreen()),
             });
       },
     );

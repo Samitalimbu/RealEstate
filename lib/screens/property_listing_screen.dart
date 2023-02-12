@@ -30,12 +30,16 @@ class _PropertyListingScreenState extends State<PropertyListingScreen> {
         child: Scaffold(
             backgroundColor: const Color(0xffff5f5f3),
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.arrow_back),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.arrow_back),
+                ),
                 Container(
-                    height: 400,
+                    height: 500,
                     child: ListView.builder(
-                        itemCount: 1,
+                        itemCount: 4,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -52,26 +56,41 @@ class _PropertyListingScreenState extends State<PropertyListingScreen> {
                                           blurRadius: 14,
                                           offset: Offset(0, 3))
                                     ]),
-                                child: Row(
-                                  children:<Widget> [
-                                  
-                                    Icon(Icons.location_city),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Korea"),
-                                        Text(
-                                            "Hello beautiful people with the beautiful city \n hahaha this is a beautiful city")
+                                child: Positioned.fill(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.location_on,
+                                          color: Colors.blue,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Korea"),
+                                              Text(
+                                                  "Hello beautiful people with the beautiful city \n hahaha this is a beautiful city")
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text("4,7"),
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.yellow,
+                                            )
+                                          ],
+                                        )
                                       ],
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [Text("4,7"), 
-                                      Icon(Icons.star)],
-                                    )
-                                  ],
+                                  ),
                                 )),
                           );
                         })),

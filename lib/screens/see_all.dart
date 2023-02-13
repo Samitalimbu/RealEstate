@@ -42,7 +42,7 @@ class _SeeScreenState extends State<SeeScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 120),
                         child: Text(
-                          "See ll",
+                          "See All",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),

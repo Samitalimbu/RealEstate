@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: 'seeScreen',
+            initialRoute: '/home',
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),

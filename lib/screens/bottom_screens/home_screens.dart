@@ -7,6 +7,7 @@ import 'package:first/screens/detail_screen.dart';
 import 'package:first/screens/home_list.dart';
 import 'package:first/screens/models/catalog.dart';
 import 'package:first/screens/property_listing_screen.dart';
+import 'package:first/screens/see_all.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -119,9 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           print(_locations[index].id);
                           Navigator.pushNamed(context, '/PropertyListingScreen',
-                              arguments: {
-                                "locationId":_locations[index].id
-                              });
+                              arguments: {"locationId": _locations[index].id});
                         },
                         child: Container(
                           // width: double.infinity,
@@ -155,10 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               children: [
-                _getCategoryInfo("House"),
-                _getCategoryInfo("Apartment"),
-                _getCategoryInfo("Rooms"),
-                _getCategoryInfo("Land"),
+                _getCategoryInfo("To Buy"),
+                _getCategoryInfo("To Sell"),
               ],
             ),
           ),
@@ -170,7 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ..fontWeight(FontWeight.bold),
             ),
             InkWell(
-              
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SeeScreen()));
+              },
               child: Txt("See All",
                   style: TxtStyle()
                     ..textColor(Colors.grey)
@@ -316,9 +316,9 @@ Widget _getCategoryInfo(String title) {
   return Parent(
     style: ParentStyle()
       ..height(60)
-      ..width(80)
+      ..width(130)
       ..elevation(3, color: Colors.grey.withOpacity(0.5))
-      ..margin(right: 14)
+      ..margin(right: 32, left: 32)
       ..borderRadius(all: 10)
       ..background.color(Colors.grey.shade100),
     child: Column(

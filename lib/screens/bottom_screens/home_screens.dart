@@ -169,10 +169,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ..fontSize(22)
                 ..fontWeight(FontWeight.bold),
             ),
-            Txt("See All",
-                style: TxtStyle()
-                  ..textColor(Colors.grey)
-                  ..fontSize(14)),
+            InkWell(
+              
+              child: Txt("See All",
+                  style: TxtStyle()
+                    ..textColor(Colors.grey)
+                    ..fontSize(14)),
+            ),
           ]),
           Container(
             height: 260,

@@ -47,6 +47,7 @@ class _PropertyListingScreenState extends State<PropertyListingScreen> {
                                 height: 100,
                                 width: 200,
                                 decoration: BoxDecoration(
+                                  
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15),
                                     boxShadow: [

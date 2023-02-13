@@ -17,9 +17,9 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
   int _selectIndex = 0;
   List<Widget> lstBottomScreen = [
     HomeScreen(),
-    const SettingScreen(),
+    // const SettingScreen(),
+    SettingScreen(),
     ProfileScreen(),
-    const SettingScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,8 @@ class _DashboardaScreenState extends State<DashboardaScreen> {
           unselectedItemColor: Colors.black,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
             BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: '',

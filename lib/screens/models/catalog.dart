@@ -52,4 +52,18 @@ List<Book> books = [
       rating: "*****",
       location: "Boudha",
       title: "Good House with good furniture"),
+  Book(
+      detail:
+          "Home is where love resides, memories are created, friends always belong, and laughter never ends.",
+      imageUrl: "assets/images/House1.jpg",
+      rating: "*****",
+      location: "Kathmandu",
+      title: "A luxury House"),
+  Book(
+      detail:
+          "Home is where love resides, memories are created, friends always belong, and laughter never ends.",
+      imageUrl: "assets/images/House2.jpg",
+      rating: "*****",
+      location: "Baneshwor",
+      title: " A house environment"),
 ];

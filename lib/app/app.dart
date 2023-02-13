@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import '../screens/see_all.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/propertydetail',
+            initialRoute: 'seeScreen',
             routes: {
               '/splash': (context) => const SplashScreen(),
               "/walkthrough": (context) => const WalkthroughScreen(),
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
               '/wear': ((context) => const WearLoginScreen()),
               '/google': ((context) => const GoogleMapScreen()),
               '/dash': ((context) => HomeScreen()),
+              'seeScreen': ((context) => SeeScreen()),
               '/home': ((context) => HomeScreen()),
               '/propertydetail': ((context) => PropertyListingScreen()),
               '/PropertyListingScreen': ((context) => PropertyListingScreen()),
